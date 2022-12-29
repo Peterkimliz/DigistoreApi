@@ -28,8 +28,8 @@ public class UserController {
          return new ResponseEntity<String>("user deleted successfully", HttpStatus.OK);
     }
     @GetMapping("all")
-    public ResponseEntity<List<User>> getAllUsers(){
-         List<User> users=userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String pageNumber){
+         List<User> users=userService.getAllUsers(pageNumber);
          return new ResponseEntity<List<User>>(users,users.size()==0?HttpStatus.NOT_FOUND: HttpStatus.OK);
     }
 

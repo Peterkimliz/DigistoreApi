@@ -18,7 +18,7 @@ public class ProductDto {
     private String  price ;
     @NotBlank(message = "please enter quantity")
     private  String quantity;
-    @Min(message = "please add atleast one image", value = 1)
+//    @Min(message = "please add atleast one image", value = 1)
     private List<String> images;
     @NotBlank(message = "please enter category")
     private String category;
