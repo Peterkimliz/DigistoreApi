@@ -38,14 +38,9 @@ public class ShopController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Shop>> getShops() {
-        List<Shop> shops = shopService.getAllShops();
+    public ResponseEntity<List<Shop>> getShops(@RequestParam (required = false) String pageNumber) {
+        List<Shop> shops = shopService.getAllShops(pageNumber);
         return new ResponseEntity<List<Shop>>(shops, shops.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
-    }
-    @GetMapping("/all/{pageSize}")
-    public ResponseEntity<Page<Shop>> getPaginatedShops(@PathVariable("pageSize") int pageSize) {
-        Page<Shop> shops = shopService.getPageableShops(pageSize);
-        return new ResponseEntity<Page<Shop>>(shops, shops.getTotalPages() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
 

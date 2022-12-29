@@ -32,11 +32,4 @@ public class UserController {
          List<User> users=userService.getAllUsers(pageNumber);
          return new ResponseEntity<List<User>>(users,users.size()==0?HttpStatus.NOT_FOUND: HttpStatus.OK);
     }
-
-
-    @GetMapping("all/{page}")
-    public ResponseEntity<List<User>> getAllPaginatedUsers(@PathVariable("page") int page){
-         List<User> users=userService.getPageableShops(page);
-         return new ResponseEntity<List<User>>(users,users.size()==0?HttpStatus.NOT_FOUND: HttpStatus.OK);
-    }
 }

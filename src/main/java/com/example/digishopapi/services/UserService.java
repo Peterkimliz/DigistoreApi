@@ -109,13 +109,14 @@ public class UserService {
 
 
     public List<User> getAllUsers(String pageNumber) {
-        if (pageNumber==null){
+        if (pageNumber == null) {
             return getUsers();
-        }else {
+        } else {
             return getPageableShops(Integer.parseInt(pageNumber));
         }
 
     }
+
     public List<User> getUsers() {
         List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         if (users.size() == 0) {
@@ -126,9 +127,8 @@ public class UserService {
     }
 
 
-
     public List<User> getPageableShops(int page) {
-        Page<User> users = userRepository.findAll(PageRequest.of(page, 15).withSort(Sort.by(Sort.Direction.DESC, "createdAt")));
+        Page<User> users = userRepository.findAll(PageRequest.of(page, 20).withSort(Sort.by(Sort.Direction.DESC, "createdAt")));
         return users.toList();
     }
 

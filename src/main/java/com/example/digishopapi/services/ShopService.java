@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,15 +25,16 @@ public class ShopService {
     private ShopRepository shopRepository;
     @Autowired
     UserRepository userRepository;
+
     public Shop createShop(String userId, ShopDto shopDto) {
         Optional<Shop> shopName = shopRepository.findByName(shopDto.getName());
-        Optional<User> user=userRepository.findById(userId);
-        if (user.isEmpty()){
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
             throw new NotFoundException("user with id not found");
         }
         if (shopName.isPresent()) {
             throw new FoundException("shop with the provided name already exists");
-        }else {
+        } else {
             Shop shopModel = new Shop();
             shopModel.setName(shopDto.getName());
             shopModel.setDescription(shopDto.getDescription());
@@ -114,7 +114,15 @@ public class ShopService {
 
     }
 
-    public List<Shop> getAllShops() {
+    public List<Shop> getAllShops(String pageNumber) {
+        if (pageNumber == null) {
+            return getShops();
+        } else {
+            return getPageableShops(Integer.parseInt(pageNumber));
+        }
+    }
+
+    public List<Shop> getShops() {
         List<Shop> shopModels = shopRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         if (shopModels.size() == 0) {
             return new ArrayList<>();
@@ -123,19 +131,9 @@ public class ShopService {
         }
     }
 
-    public Page<Shop> getPageableShops(int pageSize) {
-        Page<Shop> shops = shopRepository.findAll(PageRequest.of(0,pageSize).withSort(Sort.by(Sort.Direction.DESC, "createdAt")));
-        return shops;
+    public List<Shop> getPageableShops(int pageSize) {
+        Page<Shop> shops = shopRepository.findAll(PageRequest.of(pageSize, 20).withSort(Sort.by(Sort.Direction.DESC, "createdAt")));
+        return shops.toList();
     }
-
-//    public List<ShopModel> searchShop(String name) {
-//        List<ShopModel> shopModels = shopRepository.searchShop(name);
-//        if (shopModels.size() == 0) {
-//            return new ArrayList<>();
-//        } else {
-//            return shopModels;
-//        }
-//    }
-
 
 }
