@@ -98,7 +98,7 @@ public class RiderService {
 
     }
 
-    public List<Rider> getRiders() {
+    private List<Rider> getRiders() {
         List<Rider> riders = riderRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         if (riders.size() == 0) {
             return new ArrayList<>();
@@ -116,7 +116,7 @@ public class RiderService {
         }
     }
 
-    public List<Rider> getPaginatedRiders(int pageNumber) {
+    private List<Rider> getPaginatedRiders(int pageNumber) {
         List<Rider> riders = riderRepository.findAll(PageRequest.of(pageNumber, 20).withSort(Sort.by(Sort.Direction.DESC, "createdAt"))).toList();
         if (riders.size() == 0) {
             return new ArrayList<>();
