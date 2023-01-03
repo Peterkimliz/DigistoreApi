@@ -7,7 +7,9 @@ import com.example.digishopapi.models.Rider;
 import com.example.digishopapi.models.Shop;
 import com.example.digishopapi.repository.RiderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -98,6 +100,15 @@ public class RiderService {
 
     public List<Rider> getRiders() {
         List<Rider> riders = riderRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+        if (riders.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return riders;
+        }
+    } 
+    public List<Rider> getRidersByShopId(String shopId) {
+        Pageable page=PageRequest.of(0,20).withSort(Sort.by(Sort.Direction.DESC,"createdsAt"));
+        List<Rider> riders = riderRepository.findByShopId(shopId,page);
         if (riders.size() == 0) {
             return new ArrayList<>();
         } else {
