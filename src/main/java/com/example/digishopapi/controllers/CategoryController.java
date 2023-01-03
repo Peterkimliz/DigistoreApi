@@ -24,12 +24,12 @@ public class CategoryController {
 
     @GetMapping("{id}")
     public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id ){
-        return new ResponseEntity<Category>(categoryService.findCategoryById(id),HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.findCategoryById(id), HttpStatus.OK);
     }
 
     @GetMapping("all")
     public ResponseEntity<List<Category>>getAllCategories(){
         List<Category> categories=categoryService.findAllCategories();
-        return new ResponseEntity<List<Category>>(categories,categories.size()==0?HttpStatus.NOT_FOUND:HttpStatus.OK);
+        return new ResponseEntity<>(categories, categories.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 }
