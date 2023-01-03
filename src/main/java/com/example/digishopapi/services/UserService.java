@@ -99,12 +99,12 @@ public class UserService {
 
     public void deleteUserById(String id) {
         Optional<User> user = userRepository.findById(id);
+        System.out.println("user is "+user);
         if (user.isEmpty()) {
             throw new NotFoundException("user with the provided id doesn't exist");
         } else {
             userRepository.deleteById(id);
         }
-
     }
 
 
