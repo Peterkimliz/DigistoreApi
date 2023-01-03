@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RiderDto {
-    @NotBlank(message = "provide shopId")
-    private String shopId;
     @NotBlank(message = "provide  name")
     private String name;
     @NotBlank(message = "provide phone")
