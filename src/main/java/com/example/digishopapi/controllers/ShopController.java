@@ -29,6 +29,11 @@ public class ShopController {
     public ResponseEntity<Shop> getShopById(@PathVariable("id") String id) {
         return new ResponseEntity<>(shopService.getShopById(id), HttpStatus.OK);
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteShopById(@PathVariable("id") String id) {
+        shopService.deleteShopById(id);
+        return new ResponseEntity<>("shop deleted successfully", HttpStatus.OK);
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Shop> updateShopById(@PathVariable("id") String id, @RequestBody UpdateShopDto updateShopDto) {

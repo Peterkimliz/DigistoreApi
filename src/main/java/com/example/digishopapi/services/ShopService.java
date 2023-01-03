@@ -62,6 +62,15 @@ public class ShopService {
         }
 
     }
+    public void deleteShopById(String id) {
+        Optional<Shop> shopName = shopRepository.findById(id);
+        if (shopName.isEmpty()) {
+            throw new NotFoundException("shop with the provided id doesn't exist");
+        } else {
+            shopRepository.deleteById(id);
+        }
+
+    }
 
     public Shop updateShopById(String id, UpdateShopDto updateShopDto) {
         Optional<Shop> shopName = shopRepository.findById(id);
