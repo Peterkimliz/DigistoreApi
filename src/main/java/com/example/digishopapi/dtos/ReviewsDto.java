@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +17,4 @@ public class ReviewsDto {
     private String rating;
     @NotBlank(message = "provide userId")
     private String userId;
-    @NotBlank(message = "provide shopId")
-    private String shopId;
-
-
-
 }
