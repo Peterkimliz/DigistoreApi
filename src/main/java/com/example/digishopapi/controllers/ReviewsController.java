@@ -18,7 +18,7 @@ public class ReviewsController {
     @Autowired
     ReviewService reviewService;
 
-    @PostMapping("/shop/{shopId}")
+    @PostMapping("/create/{shopId}")
     public ResponseEntity<Reviews> createReviews(@PathVariable("shopId") String shopId, @RequestBody @Validated ReviewsDto reviewsDto) {
         return new ResponseEntity<>(reviewService.createReview(shopId, reviewsDto), HttpStatus.CREATED);
     }
