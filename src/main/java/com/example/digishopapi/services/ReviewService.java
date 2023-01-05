@@ -19,14 +19,16 @@ public class ReviewService {
     ReviewsRepository reviewsRepository;
     @Autowired
     ShopService shopService;
+    @Autowired
+    UserService userService;
 
     public Reviews createReview(String shopId, ReviewsDto reviewsDto) {
-        Shop shop = shopService.getShopById(shopId);
+        shopService.getShopById(shopId);
+        System.out.println(reviewsDto.getUserId());
+        userService.getUserById(reviewsDto.getUserId());
         Reviews foundReview = reviewsRepository.findByShopIdAndUserId(shopId, reviewsDto.getUserId());
 
-        if (shop == null) {
-            throw new NotFoundException("shop with id not found");
-        } else if (foundReview != null) {
+        if (foundReview != null) {
             throw new FoundException(" you have reviewed this shop already");
         } else {
             Reviews reviews = new Reviews();
@@ -35,7 +37,7 @@ public class ReviewService {
             reviews.setReview(reviewsDto.getReview());
             reviews.setShopId(shopId);
             reviews.setRating(Integer.parseInt(reviewsDto.getRating()));
-            reviews.setUserId(reviews.getUserId());
+            reviews.setUserId(reviewsDto.getUserId());
             return reviewsRepository.save(reviews);
         }
 

@@ -6,19 +6,19 @@ import com.example.digishopapi.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reviews")
+@RequestMapping("api/v1/reviews/")
 public class ReviewsController {
-
     @Autowired
     ReviewService reviewService;
 
-    @PostMapping("/shop/{shopId}")
-    public ResponseEntity<Reviews> createReviews(@PathVariable("shopId") String shopId, @RequestBody ReviewsDto reviewsDto) {
+    @PostMapping("create/{shopId}")
+    public ResponseEntity<Reviews> createReviews(@PathVariable("shopId") String shopId, @RequestBody @Validated  ReviewsDto reviewsDto) {
         return new ResponseEntity<>(reviewService.createReview(shopId, reviewsDto), HttpStatus.CREATED);
     }
 
