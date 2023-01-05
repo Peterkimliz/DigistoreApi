@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class RiderController {
     @Autowired
     RiderService riderService;
-
     @PostMapping("/create/{shopId}")
     public ResponseEntity<Rider> createRider(@PathVariable("shopId") String shopId, @RequestBody @Validated  RiderDto riderDto) {
         return new ResponseEntity<>(riderService.createRider(shopId, riderDto), HttpStatus.CREATED);
     }
-
     @GetMapping("/{riderId}")
     public ResponseEntity<Rider> getRiderById(@PathVariable("riderId") String riderId) {
         return new ResponseEntity<>(riderService.getRiderById(riderId), HttpStatus.OK);
