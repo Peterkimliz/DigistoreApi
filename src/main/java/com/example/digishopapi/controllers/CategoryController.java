@@ -18,18 +18,26 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping("create")
-    public ResponseEntity<Category> createCategory(@RequestBody @Validated  CategoryDto categoryDto) {
+    public ResponseEntity<Category> createCategory(@RequestBody @Validated CategoryDto categoryDto) {
         return new ResponseEntity<>(categoryService.createCategory(categoryDto), HttpStatus.CREATED);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id ){
+    public ResponseEntity<Category> getCategoryById(@PathVariable("id") String id) {
         return new ResponseEntity<>(categoryService.findCategoryById(id), HttpStatus.OK);
     }
 
     @GetMapping("all")
-    public ResponseEntity<List<Category>>getAllCategories(){
-        List<Category> categories=categoryService.findAllCategories();
+    public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String pageNumber) {
+        List<Category> categories = categoryService.findAllCategories(pageNumber);
         return new ResponseEntity<>(categories, categories.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
+
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") String id) {
+        categoryService.deleteCategory(id);
+        return new ResponseEntity<>("category deleted", HttpStatus.CREATED);
+    }
+
 }

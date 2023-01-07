@@ -16,6 +16,7 @@ public class Category {
     @Id
     private String id;
     private String name;
+    private String image;
     private Date createdAt;
     private Date updatedAt;
 
