@@ -10,19 +10,19 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/riders")
+@RequestMapping("/api/riders/")
 public class RiderController {
     @Autowired
     RiderService riderService;
-    @PostMapping("/create/{shopId}")
+    @PostMapping("create/{shopId}")
     public ResponseEntity<Rider> createRider(@PathVariable("shopId") String shopId, @RequestBody @Validated  RiderDto riderDto) {
         return new ResponseEntity<>(riderService.createRider(shopId, riderDto), HttpStatus.CREATED);
     }
-    @GetMapping("/{riderId}")
+    @GetMapping("{riderId}")
     public ResponseEntity<Rider> getRiderById(@PathVariable("riderId") String riderId) {
         return new ResponseEntity<>(riderService.getRiderById(riderId), HttpStatus.OK);
     }
-    @DeleteMapping("/{riderId}")
+    @DeleteMapping("{riderId}")
     public ResponseEntity<?> deleteRiderById(@PathVariable("riderId") String riderId) {
         riderService.deleteRiderById(riderId);
         return new ResponseEntity<>("rider deleted successfull",HttpStatus.OK);

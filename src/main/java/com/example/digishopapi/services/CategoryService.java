@@ -46,9 +46,9 @@ public class CategoryService {
     }
 
     public List<Category> findAllCategories(String pageNumber) {
-        if (pageNumber==null){
+        if (pageNumber == null) {
             return findCategories();
-        }else{
+        } else {
             return getPaginatedCategories(Integer.parseInt(pageNumber));
         }
     }
