@@ -23,7 +23,7 @@ public class Product {
     private  int quantity;
     private List<String > images;
     private Category category;
-    private String ShopId;
+    private Shop shop;
     private Date createdAt;
     private Date updatedAt;
     private Boolean isDeleted=false;

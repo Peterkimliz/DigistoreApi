@@ -28,13 +28,14 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(products, products.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
-    @GetMapping("{productId}")
+    @GetMapping("product/{productId}")
     public ResponseEntity<Product> getProductById(@PathVariable("productId") String productId) {
         return new ResponseEntity<Product>(productService.getProductById(productId), HttpStatus.OK);
     }
 
-    @GetMapping("shop/{shopId}/{pageNumber}")
-    public ResponseEntity<List<Product>> getProductByShopId(@PathVariable("shopId") String shopId, @PathVariable("pageNumber") int pageNumber) {
+
+    @GetMapping("shop/{shopId}")
+    public ResponseEntity<List<Product>> getProductByShopId(@PathVariable("shopId") String shopId, @RequestParam("pageNumber") String pageNumber) {
         List<Product> products = productService.getProductsByShopId(shopId, pageNumber);
         return new ResponseEntity<List<Product>>(products, products.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
