@@ -1,7 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/storepi
+      uri: mongodb://localhost:27017/digishop
 
 server:
   port: 9000

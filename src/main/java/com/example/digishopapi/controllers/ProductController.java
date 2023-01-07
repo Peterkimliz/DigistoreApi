@@ -35,7 +35,8 @@ public class ProductController {
 
 
     @GetMapping("shop/{shopId}")
-    public ResponseEntity<List<Product>> getProductByShopId(@PathVariable("shopId") String shopId, @RequestParam("pageNumber") String pageNumber) {
+    public ResponseEntity<List<Product>> getProductsByShopId(@PathVariable("shopId") String shopId, @RequestParam(required = false) String pageNumber) {
+
         List<Product> products = productService.getProductsByShopId(shopId, pageNumber);
         return new ResponseEntity<List<Product>>(products, products.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }

@@ -1,6 +1,5 @@
 package com.example.digishopapi.dtos;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,9 +17,10 @@ public class ProductDto {
     private String  price ;
     @NotBlank(message = "please enter quantity")
     private  String quantity;
-//    @Min(message = "please add atleast one image", value = 1)
-    private List<String> images;
     @NotBlank(message = "please enter category")
     private String category;
+    @NotEmpty(message = "enter product image")
+    private List<String> images;
+
 
 }
