@@ -42,7 +42,7 @@ public class ProductService {
             product.setQuantity(Integer.parseInt(productDto.getQuantity()));
             product.setCategory(category);
             product.setDescription(productDto.getDescription());
-            product.setShopId(shopId);
+            product.setShop(shop);
             product.setImages(productDto.getImages());
             return productRepository.save(product);
         }
@@ -98,8 +98,8 @@ public class ProductService {
         }
     }
 
-    public List<Product> getProductsByShopId(String shopId, int pageNumber) {
-        Pageable page = PageRequest.of(pageNumber, 20).withSort(Sort.Direction.DESC, "createdAt");
+    public List<Product> getProductsByShopId(String shopId, String pageNumber) {
+        Pageable page = PageRequest.of(Integer.parseInt(pageNumber), 15).withSort(Sort.Direction.DESC, "createdAt");
         productRepository.findByShopId(shopId, page);
         List<Product> products = productRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         if (products.size() == 0) {

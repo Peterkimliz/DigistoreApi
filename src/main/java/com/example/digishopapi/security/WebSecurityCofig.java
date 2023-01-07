@@ -30,7 +30,7 @@ public class WebSecurityCofig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers( "/api/auth/**","/api/categories/**")
+                .requestMatchers( "/api/auth/**","/api/categories/**","/api/products/all","/api/products/product","/api/products/shop/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
