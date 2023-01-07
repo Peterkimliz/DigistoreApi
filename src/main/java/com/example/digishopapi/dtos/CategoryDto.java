@@ -11,4 +11,6 @@ import lombok.NoArgsConstructor;
 public class CategoryDto {
     @NotBlank(message = "please enter category name")
     private String name;
+    @NotBlank(message = "please enter category image")
+    private String image;
 }

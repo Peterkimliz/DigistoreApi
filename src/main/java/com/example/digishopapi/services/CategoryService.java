@@ -28,6 +28,7 @@ public class CategoryService {
         } else {
             Category category = new Category();
             category.setCreatedAt(new Date(System.currentTimeMillis()));
+            category.setImage(categoryDto.getImage());
             category.setUpdatedAt(new Date(System.currentTimeMillis()));
             category.setName(categoryDto.getName().toLowerCase());
             return categoryRepository.save(category);
@@ -44,7 +45,15 @@ public class CategoryService {
         }
     }
 
-    public List<Category> findAllCategories() {
+    public List<Category> findAllCategories(String pageNumber) {
+        if (pageNumber==null){
+            return findCategories();
+        }else{
+            return getPaginatedCategories(Integer.parseInt(pageNumber));
+        }
+    }
+
+    private List<Category> findCategories() {
         List<Category> categories = categoryRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
         if (categories.size() == 0) {
             return new ArrayList<>();
@@ -53,8 +62,9 @@ public class CategoryService {
         }
     }
 
-    public List<Category> getPaginatedCategories(int pageNumber) {
-        List<Category> categories = categoryRepository.findAll(PageRequest.of(pageNumber, 15).withSort(Sort.by(Sort.Direction.DESC, "createdAt"))).toList();
+
+    private List<Category> getPaginatedCategories(int pageNumber) {
+        List<Category> categories = categoryRepository.findAll(PageRequest.of(pageNumber, 10).withSort(Sort.by(Sort.Direction.DESC, "createdAt"))).toList();
         if (categories.size() == 0) {
             return new ArrayList<>();
         } else {
