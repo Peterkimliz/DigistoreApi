@@ -30,6 +30,7 @@ public class CategoryController {
     @GetMapping("all")
     public ResponseEntity<List<Category>> getAllCategories(@RequestParam(required = false) String pageNumber) {
         List<Category> categories = categoryService.findAllCategories(pageNumber);
+        System.out.println("iam called"+categories);
         return new ResponseEntity<>(categories, categories.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
