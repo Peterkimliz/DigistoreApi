@@ -91,6 +91,7 @@ public class UserService {
             User newUser = foundUser.get();
             newUser.setUsername(user.getUsername() == null ? newUser.getUsername() : user.getUsername());
             newUser.setPhone(user.getPhone() == null ? newUser.getPhone() : user.getPhone());
+            newUser.setProfileImage(user.getProfileImage()==null? newUser.getProfileImage():user.getProfileImage());
             newUser.setUpdatedAt(new Date(System.currentTimeMillis()));
             return userRepository.save(newUser);
         }

@@ -18,6 +18,7 @@ public class User {
     private String id;
     private String email;
     private String username;
+    private String profileImage="";
     @JsonIgnore
     private String password;
     private String phone;

@@ -3,7 +3,6 @@ package com.example.digishopapi.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -30,8 +29,10 @@ public class WebSecurityCofig {
         httpSecurity
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers( "/api/auth/**","/api/categories/**","/api/products/all","/api/products/product","/api/products/shop/**")
+                .requestMatchers( "/api/auth/**","/api/categories/**","/api/products/all")
                 .permitAll()
+                .requestMatchers("/api/products/product/**","/api/products/shop/**").permitAll()
+                .requestMatchers("/api/reviews/product/all/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
