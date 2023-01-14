@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ProductReviewRepository extends MongoRepository<ProductReviews,String> {
-    ProductReviews findByUserId(User userid);
+    ProductReviews findByUserIdAndProductId(User userid,String productId);
     List<ProductReviews> findByProductId(String productId);
 }

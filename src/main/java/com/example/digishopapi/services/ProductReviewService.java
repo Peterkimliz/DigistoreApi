@@ -17,11 +17,14 @@ public class ProductReviewService {
     @Autowired
     private  ProductReviewRepository productReviewRepository;
     @Autowired
+    ProductService productService;
+    @Autowired
     UserService userService;
 
     public ProductReviews createReview(String productId, ReviewsDto reviewsDto) {
         User user=userService.getUserById(reviewsDto.getUserId());
-        ProductReviews foundReview = productReviewRepository.findByUserId(user);
+        productService.getProductById(productId);
+        ProductReviews foundReview = productReviewRepository.findByUserIdAndProductId(user,productId);
 
         if (foundReview != null) {
             throw new FoundException(" you have reviewed this product already");

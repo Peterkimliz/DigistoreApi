@@ -98,6 +98,16 @@ public class ProductService {
         }
     }
 
+    public List<Product> getPaginatedProductsByCategory(int pageNumber) {
+        List<Product> products = productRepository.findAll(PageRequest.of(pageNumber, 20).withSort(Sort.by(Sort.Direction.DESC, "createdAt"))).toList();
+        if (products.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return products;
+        }
+    }
+
+
     public List<Product> getProductsByShopId(String shopId, String pageNumber) {
 
        List<Product> products= productRepository.findByShopId(shopId,Sort.by(Sort.Direction.DESC,"createdAt"));
