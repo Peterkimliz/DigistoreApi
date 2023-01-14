@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface ProductReviewRepository extends MongoRepository<ProductReviews,String> {
     ProductReviews findByUserId(User userid);
-    List<Reviews> findByProductId(String productId);
+    List<ProductReviews> findByProductId(String productId);
 }

@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class ProductReviewService {
     @Autowired
-    ProductReviewRepository productReviewRepository;
+    private  ProductReviewRepository productReviewRepository;
     @Autowired
     UserService userService;
 
@@ -39,8 +39,8 @@ public class ProductReviewService {
 
     }
 
-    public List<Reviews> getProductReviews(String productId) {
-        List<Reviews> reviews = productReviewRepository.findByProductId(productId);
+    public List<ProductReviews> getProductReviews(String productId) {
+        List<ProductReviews> reviews = productReviewRepository.findByProductId(productId);
         if (reviews.size() == 0) {
             return new ArrayList<>();
         } else {
