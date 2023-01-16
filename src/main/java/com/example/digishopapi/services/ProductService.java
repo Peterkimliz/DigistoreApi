@@ -117,6 +117,16 @@ public class ProductService {
             return products;
         }
     }
+    public List<Product> getProductsByCategory(String categoryId, String pageNumber) {
+        Pageable pageable= PageRequest.of(Integer.parseInt(pageNumber),15).withSort(Sort.by(Sort.Direction.DESC,"createdAt"));
+        Category category=categoryService.findCategoryById(categoryId);
+        List<Product> products= productRepository.findByCategory(category,pageable);
+        if (products.size() == 0) {
+            return new ArrayList<>();
+        } else {
+            return products;
+        }
+    }
 
 
 }

@@ -41,6 +41,13 @@ public class ProductController {
         return new ResponseEntity<List<Product>>(products, products.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
+    @GetMapping("category/{categoryId}")
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable("categoryId") String categoryId, @RequestParam(required = false) String pageNumber) {
+
+        List<Product> products = productService.getProductsByCategory(categoryId, pageNumber);
+        return new ResponseEntity<List<Product>>(products, products.size() == 0 ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+    }
+
     @PutMapping("{productId}")
     public ResponseEntity<String> deleteProductById(@PathVariable("productId") String productId) {
         productService.deleteProductById(productId);
