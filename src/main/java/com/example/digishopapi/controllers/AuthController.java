@@ -27,7 +27,6 @@ public class AuthController {
     @PostMapping("signin")
     public ResponseEntity<LoginResponse> loginUser(@RequestBody @Validated LoginDto loginDto){
        return new ResponseEntity<LoginResponse>(userService.loginUser(loginDto),HttpStatus.OK);
-
     }
 
 }
