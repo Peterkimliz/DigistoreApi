@@ -91,7 +91,7 @@ public class UserService {
             User newUser = foundUser.get();
             newUser.setUsername(user.getUsername() == null ? newUser.getUsername() : user.getUsername());
             newUser.setPhone(user.getPhone() == null ? newUser.getPhone() : user.getPhone());
-            newUser.setProfileImage(user.getProfileImage()==null? newUser.getProfileImage():user.getProfileImage());
+            newUser.setProfileImage(user.getProfileImage() == null ? newUser.getProfileImage() : user.getProfileImage());
             newUser.setUpdatedAt(new Date(System.currentTimeMillis()));
             return userRepository.save(newUser);
         }
@@ -100,7 +100,7 @@ public class UserService {
 
     public void deleteUserById(String id) {
         Optional<User> user = userRepository.findById(id);
-        System.out.println("user is "+user);
+        System.out.println("user is " + user);
         if (user.isEmpty()) {
             throw new NotFoundException("user with the provided id doesn't exist");
         } else {
@@ -133,5 +133,19 @@ public class UserService {
         return users.toList();
     }
 
+
+    public void updateWishList(String productId, String userId) {
+        User user = getUserById(userId);
+        List<String> productIds = user.getWishlist();
+        boolean exists = productIds.stream().anyMatch(e -> e.equals(productId));
+        if (exists) {
+            productIds.remove(productId);
+        } else {
+            productIds.add(productId);
+        }
+        user.setWishlist(productIds);
+        userRepository.save(user);
+
+    }
 
 }
