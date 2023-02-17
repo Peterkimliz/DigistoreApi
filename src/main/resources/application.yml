@@ -1,10 +1,10 @@
 spring:
   data:
     mongodb:
-#      uri: mongodb+srv://peterkimani:kimani89@cluster0.l6ma0.mongodb.net/?retryWrites=true&w=majority
-#      database: DigiShopApiSpring
+    uri: mongodb+srv://peterkimani:kimani89@cluster0.l6ma0.mongodb.net/?retryWrites=true&w=majority
+    database: DigiShopApiSpring
       uri: mongodb://localhost:27017/digishop
 
-server:
-  port: 9000
-  address: 192.168.0.101
+# server:
+#   port: 9000
+#   address: 192.168.0.101
