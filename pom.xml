@@ -14,7 +14,7 @@
     <name>DigiShopApi</name>
     <description>DigiShopApi</description>
     <properties>
-        <java.version>19</java.version>
+        <java.version>18</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -80,6 +80,12 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>          
             </plugin>
         </plugins>
     </build>
