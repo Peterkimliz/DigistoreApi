@@ -33,6 +33,7 @@ public class WebSecurityCofig {
                 .permitAll()
                 .requestMatchers("/api/products/product/**","/api/products/shop/**").permitAll()
                 .requestMatchers("/api/reviews/product/all/**","/api/products/category/**").permitAll()
+                .requestMatchers("/api/shops/all**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
