@@ -50,6 +50,7 @@ public class WishlistService {
         if (wishlists.size() == 0) {
             return new ArrayList<>();
         } else {
+            System.out.print(wishlists);  
             return wishlists;
         }
     }
